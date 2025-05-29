@@ -111,17 +111,35 @@
       color: #cc005f;
       text-decoration: none;
       font-weight: bold;
-    }
-
-    .error-msg {
+    }    .error-msg {
       color: red;
       margin-bottom: 15px;
       font-size: 14px;
+    }
+
+    .home-link {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .home-link a {
+      color: #cc005f;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    .home-link a:hover {
+      color: #ff3385;
     }
   </style>
 </head>
 <body>
   <div class="container">
+    <div class="home-link">
+      <a th:href="@{/}">← Kembali ke Beranda</a>
+    </div>
     <div class="title">Daftar</div>
     <div class="subtitle">Masukkan informasi pendaftaran yang valid.</div>
 
@@ -151,11 +169,14 @@
       <div class="input-box">
         <span class="details">Nomor WhatsApp</span>
         <input type="tel" name="phone" placeholder="+62" />
-      </div>
-
-      <div class="input-box">
+      </div>      <div class="input-box">
         <span class="details">Kata Sandi</span>
         <input type="password" th:field="*{password}" placeholder="Kata sandi" required />
+      </div>
+      
+      <div class="input-box">
+        <span class="details">Konfirmasi Kata Sandi</span>
+        <input type="password" th:field="*{confirmPassword}" placeholder="Konfirmasi kata sandi" required />
       </div>
 
       <div class="checkbox">

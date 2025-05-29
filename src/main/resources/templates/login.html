@@ -78,16 +78,41 @@
             color: #00bcd4;
             text-decoration: none;
             transition: color 0.3s;
+        }        .register-link a:hover {
+            color: #ffffff;
         }
 
-        .register-link a:hover {
+        .home-link {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .home-link a {
+            color: #00bcd4;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        .home-link a:hover {
             color: #ffffff;
         }
     </style>
 </head>
 <body>
-    <div class="login-container">
+    <div class="login-container">        <div class="home-link">
+            <a th:href="@{/}">← Kembali ke Beranda</a>
+        </div>
         <h2>Login</h2>
+        
+        <div th:if="${param.error}" style="color: #ff4d4d; text-align: center; margin-bottom: 15px;">
+            Username atau password salah. Silakan coba lagi.
+        </div>
+        
+        <div th:if="${param.registered}" style="color: #4dff4d; text-align: center; margin-bottom: 15px;">
+            Registrasi berhasil! Silakan login.
+        </div>
+        
         <form method="post" th:action="@{/login}">
             <label>Username:</label>
             <input type="text" name="username" required>
