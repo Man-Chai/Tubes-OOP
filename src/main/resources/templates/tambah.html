@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Tambah Transaksi</title>
+</head>
+<body>
+    <h2>Form Tambah Transaksi</h2>
+    <form method="post" action="/tambah" th:object="${topUp}">
+        <label>Username:</label>
+        <input type="text" name="username" required><br>
+        <label>Game:</label>
+        <input type="text" name="game" required><br>
+        <label>Nominal:</label>
+        <input type="number" name="nominal" required><br>
+        <label>Harga:</label>
+        <input type="number" name="harga" required><br>
+        <button type="submit">Simpan</button>
+    </form>
+</body>
+</html>

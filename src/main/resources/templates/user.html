@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>User Dashboard</title>
+</head>
+<body>
+    <h2>Transaksi Anda</h2>
+    <a href="/tambah">Tambah Transaksi</a>
+    <table border="1">
+        <tr>
+            <th>Game</th>
+            <th>Nominal</th>
+            <th>Harga</th>
+        </tr>
+        <tr th:each="topup : ${topups}">
+            <td th:text="${topup.game}"></td>
+            <td th:text="${topup.nominal}"></td>
+            <td th:text="${topup.harga}"></td>
+        </tr>
+    </table>
+</body>
+</html>
+
