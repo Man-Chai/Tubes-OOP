@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Daftar Item</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            padding: 20px;
+        }
+        .container {
+            margin-top: 20px;
+        }
+        .btn-action {
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Daftar Item</h1>
+
+        <div th:if="${error}" class="alert alert-danger" role="alert">
+            <p th:text="${error}"></p>
+        </div>
+
+        <a th:href="@{/tambahItem}" class="btn btn-primary mb-3">Tambah Item Baru</a>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nama Item</th>
+                    <th>Tipe Item</th>
+                    <th>Harga Item</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="item : ${items}">
+                    <td th:text="${item.id}"></td>
+                    <td th:text="${item.namaItem}"></td>
+                    <td th:text="${item.tipeItem}"></td>
+                    <td th:text="${item.hargaItem}"></td>
+                    <td>
+                        <a th:href="@{/editItem/{id}(id=${item.id})}" class="btn btn-warning btn-sm btn-action">Edit</a>
+                        <a th:href="@{/hapusItem/{id}(id=${item.id})}" class="btn btn-danger btn-sm btn-action">Hapus</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

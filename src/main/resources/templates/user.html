@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>User Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        h2 {
+            color: #333;
+            margin: 0;
+        }
+        .btn {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+        .btn-danger {
+            background-color: #dc3545;
+        }
+        .btn-success {
+            background-color: #28a745;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .welcome {
+            color: #666;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div>
+                <h2>User Dashboard</h2>
+                <p class="welcome">Selamat datang, <span th:text="${username}"></span>!</p>
+            </div>
+            <div>
+                <a href="/" class="btn">Home</a>
+                <a href="/logout" class="btn btn-danger">Logout</a>
+            </div>
+        </div>
+        
+        <div style="margin-bottom: 20px;">
+            <a href="/tambah" class="btn btn-success">Tambah Transaksi</a>
+        </div>
+        
+        <h3>Transaksi Anda</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Game</th>
+                    <th>Nominal</th>
+                    <th>Harga</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="topup : ${topups}">
+                    <td th:text="${topup.game}"></td>
+                    <td th:text="${topup.nominal}"></td>
+                    <td th:text="${topup.harga}"></td>
+                </tr>
+                <tr th:if="${#lists.isEmpty(topups)}">
+                    <td colspan="3" style="text-align: center; color: #666;">Belum ada transaksi</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
+
