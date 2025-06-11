@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Admin Dashboard</title>
+<<<<<<< HEAD
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+=======
+>>>>>>> 0a358e12b8c2b775e99df23e87dcdcd12356ff1c
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div>
+                <h1>Admin Dashboard</h1>
+            </div>
+            <div>
+                <a href="/itemlist" class="btn btn-primary">Items Dashboard</a>
+                <a href="/" class="btn btn-danger">Logout</a>
+            </div>
+        </div>
+        
+        <h2>Daftar Semua Transaksi</h2>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Username</th>
+                    <th>Game</th>
+                    <th>Nominal</th>
+                    <th>Harga</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="topup : ${topups}">
+                    <td th:text="${topup.id}"></td>
+                    <td th:text="${topup.username}"></td>
+                    <td th:text="${topup.game}"></td>
+                    <td th:text="${topup.nominal}"></td>
+                    <td th:text="${topup.harga}"></td>
+                    <td>
+                        <a th:href="@{'/hapus/' + ${topup.id}}" class="btn btn-danger">Hapus</a>
+                    </td>
+                </tr>
+                <tr th:if="${#lists.isEmpty(topups)}">
+                    <td colspan="6" style="text-align: center;">Belum ada transaksi</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

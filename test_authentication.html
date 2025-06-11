@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Authentication Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .test-section h3 {
+            margin-top: 0;
+            color: #333;
+        }
+        .test-links {
+            margin: 10px 0;
+        }
+        .test-links a {
+            display: inline-block;
+            margin: 5px 10px 5px 0;
+            padding: 8px 16px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+        .test-links a:hover {
+            background-color: #0056b3;
+        }
+        .admin-link {
+            background-color: #dc3545 !important;
+        }
+        .admin-link:hover {
+            background-color: #c82333 !important;
+        }
+        .note {
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-left: 4px solid #007bff;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 Authentication Flow Test Suite</h1>
+        <p>This page provides comprehensive testing for the TopupGame authentication system.</p>
+
+        <div class="test-section">
+            <h3>🔧 Setup & Debug</h3>
+            <div class="test-links">
+                <a href="http://localhost:1000/debug/create-default-users">Create Default Users</a>
+                <a href="http://localhost:1000/debug/users">View All Users</a>
+                <a href="http://localhost:1000/debug/auth-status">Check Auth Status</a>
+            </div>
+            <div class="note">
+                <strong>Default Test Users:</strong><br>
+                • Admin: username=<code>admin</code>, password=<code>admin123</code><br>
+                • User: username=<code>user</code>, password=<code>user123</code><br>
+                • Test User: username=<code>testuser</code>, password=<code>test123</code>
+            </div>
+        </div>
+
+        <div class="test-section">
+            <h3>🔐 Authentication Pages</h3>
+            <div class="test-links">
+                <a href="http://localhost:1000/login">Login Page</a>
+                <a href="http://localhost:1000/register">Registration Page</a>
+                <a href="http://localhost:1000/logout">Logout</a>
+            </div>
+        </div>
+
+        <div class="test-section">
+            <h3>🚪 Protected Endpoints (Require Authentication)</h3>
+            <div class="test-links">
+                <a href="http://localhost:1000/user">User Dashboard</a>
+                <a href="http://localhost:1000/admin" class="admin-link">Admin Dashboard</a>
+            </div>
+            <div class="note">
+                <strong>Expected Behavior:</strong> These should redirect to login page if not authenticated.
+            </div>
+        </div>
+
+        <div class="test-section">
+            <h3>🌐 Public Endpoints</h3>
+            <div class="test-links">
+                <a href="http://localhost:1000/">Home Page</a>
+                <a href="http://localhost:1000/nonexistent">404 Error Test</a>
+            </div>
+        </div>
+
+        <div class="test-section">
+            <h3>📋 Test Instructions</h3>
+            <ol>
+                <li><strong>Create Users:</strong> Click "Create Default Users" to set up test accounts</li>
+                <li><strong>Test Redirects:</strong> Try accessing protected endpoints without login</li>
+                <li><strong>Test Login:</strong> 
+                    <ul>
+                        <li>Login as admin (admin/admin123) → should redirect to <code>/admin</code></li>
+                        <li>Login as user (user/user123) → should redirect to <code>/user</code></li>
+                    </ul>
+                </li>
+                <li><strong>Test Authorization:</strong> After logging in as regular user, try accessing <code>/admin</code></li>
+                <li><strong>Test Registration:</strong> Register a new user and verify login works</li>
+                <li><strong>Test Error Pages:</strong> Access non-existent URLs to test 404 handling</li>
+            </ol>
+        </div>
+
+        <div class="test-section">
+            <h3>✅ Expected Results</h3>
+            <ul>
+                <li>✅ Protected routes redirect to login when not authenticated</li>
+                <li>✅ Login redirects to appropriate dashboard based on user role</li>
+                <li>✅ Admin users can access both /admin and /user</li>
+                <li>✅ Regular users can only access /user (403 error for /admin)</li>
+                <li>✅ Registration creates new users with encrypted passwords</li>
+                <li>✅ Custom 404 page displays for non-existent routes</li>
+                <li>✅ Logout properly clears session and redirects to login</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
