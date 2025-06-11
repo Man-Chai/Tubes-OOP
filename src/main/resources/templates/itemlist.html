@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         body {
+<<<<<<< HEAD
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 20px;
@@ -43,15 +44,30 @@
         }
         tr:nth-child(even) {
             background-color: #f9f9f9;
+=======
+            padding: 20px;
+        }
+        .container {
+            margin-top: 20px;
+        }
+        .btn-action {
+            margin-right: 5px;
+>>>>>>> 0a358e12b8c2b775e99df23e87dcdcd12356ff1c
         }
     </style>
 </head>
 <body>
     <div class="container">
+<<<<<<< HEAD
+=======
+        <h1>Daftar Item</h1>
+
+>>>>>>> 0a358e12b8c2b775e99df23e87dcdcd12356ff1c
         <div th:if="${error}" class="alert alert-danger" role="alert">
             <p th:text="${error}"></p>
         </div>
 
+<<<<<<< HEAD
         <div class="header">
             <div>
                 <h1>Daftar Item</h1>
@@ -62,6 +78,10 @@
             </div>
         </div>
         <h2>Daftar Semua Item</h2>
+=======
+        <a th:href="@{/tambahItem}" class="btn btn-primary mb-3">Tambah Item Baru</a>
+
+>>>>>>> 0a358e12b8c2b775e99df23e87dcdcd12356ff1c
         <table class="table table-striped">
             <thead>
                 <tr>
