@@ -11,10 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.model.TopUp;
-<<<<<<< HEAD
 import com.example.repository.ItemListRepository;
-=======
->>>>>>> 0a358e12b8c2b775e99df23e87dcdcd12356ff1c
 import com.example.repository.TopUpRepository;
 
 @Controller
@@ -40,25 +37,18 @@ public class TopUpController {
         return "user";
     }
 
-<<<<<<< HEAD
     @Autowired
     private ItemListRepository itemRepo;
 
-=======
->>>>>>> 0a358e12b8c2b775e99df23e87dcdcd12356ff1c
     @GetMapping("/tambah")
     public String formTopup(Model model, Authentication authentication) {
         TopUp topUp = new TopUp();
         if (authentication != null) {
             topUp.setUsername(authentication.getName());
         }
-<<<<<<< HEAD
 
         model.addAttribute("topUp", topUp);
         model.addAttribute("items", itemRepo.findAll()); // kirim item ke view
-=======
-        model.addAttribute("topUp", topUp);
->>>>>>> 0a358e12b8c2b775e99df23e87dcdcd12356ff1c
         return "tambah";
     }
 
