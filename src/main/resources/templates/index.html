@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Top Up Game Populer - Layanan top up game termurah dan terpercaya">
+  <title>Top Up Game Populer - Layanan Top Up Termurah</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    .navbar {
+  background: rgba(255, 255, 255, 0); /* semi transparan putih */
+  backdrop-filter: blur(10px); /* blur efek latar */
+  padding: 1rem 1.5rem;
+  box-shadow: none; /* hapus shadow */
+  margin-bottom: 1rem;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+.nav-logo {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: var(--primary);
+}
+
+.nav-links {
+  display: flex;
+  gap: 1rem;
+}
+
+.nav-btn {
+  padding: 0.5rem 1.2rem;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: var(--transition);
+  background: var(--white);
+  color: var(--primary);
+  border: 2px solid var(--primary);
+}
+
+.nav-btn:hover {
+  background: var(--primary);
+  color: var(--white);
+}
+
+.nav-btn.register {
+  background: var(--primary);
+  color: var(--white);
+  border: none;
+}
+
+.nav-btn.register:hover {
+  background: var(--primary-dark);
+}
+    :root {
+      --primary: #000000;
+      --primary-dark: #eb9411;
+      --secondary: #debcfe;
+      --background: #d76dfe;
+      --accent: #ff0000;
+      --text-dark: #000000;
+      --text-light: #ff0000;
+      --highlight: #fff700;
+      --white: #ffffff;
+      --card-radius: 16px;
+      --shadow: 0 4px 12px rgba(0,0,0,0.1);
+      --transition: all 0.3s ease;
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+   
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: url('https://i.pinimg.com/originals/56/60/6e/56606ef5c5860bb627eec04fc19005ca.gif') no-repeat center center fixed;
+      background-size: cover;
+      color: var(--text-dark);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+    }
+
+    header {
+      margin-bottom: 2.5rem;
+      text-align: center;
+    }
+
+    h1 {
+      color: var(--primary);
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .subtitle {
+      color: var(--text-light);
+      font-size: 1.1rem;
+      max-width: 700px;
+      margin: 0 auto 2rem;
+    }
+
+    h2 {
+      color: var(--accent);
+      font-size: 1.8rem;
+      margin-bottom: 1.2rem;
+      position: relative;
+      display: inline-block;
+    }
+
+    h2::after {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      left: 0;
+      width: 50px;
+      height: 3px;
+      background: var(--primary);
+      border-radius: 3px;
+    }
+
+    .section {
+      margin-bottom: 3rem;
+    }
+
+    .popular-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.2rem;
+      margin-bottom: 2rem;
+    }
+
+    .popular-item {
+      background: var(--white);
+      padding: 1.2rem;
+      border-radius: var(--card-radius);
+      box-shadow: var(--shadow);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      transition: var(--transition);
+    }
+
+    .popular-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+    }
+
+    .popular-item img {
+      width: 50px;
+      height: 50px;
+      border-radius: 12px;
+      object-fit: cover;
+      border: 2px solid var(--secondary);
+    }
+
+    .popular-info {
+      flex: 1;
+    }
+
+    .popular-info strong {
+      display: block;
+      font-size: 1.1rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .popular-info small {
+      color: var(--text-light);
+      font-size: 0.85rem;
+    }
+
+    .button-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+      justify-content: center;
+    }
+
+    .btn {
+      background: var(--primary);
+      color: var(--white);
+      border: none;
+      padding: 0.8rem 1.5rem;
+      border-radius: 50px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+    }
+
+    .btn i {
+      font-size: 1.1rem;
+    }
+
+    .game-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .game-card {
+      background: var(--white);
+      border-radius: var(--card-radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      text-align: center;
+      position: relative;
+      transition: var(--transition);
+    }
+
+    .game-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 20px rgba(0,0,0,0.15);
+    }
+
+    .game-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-bottom: 3px solid var(--primary);
+    }
+
+    .game-label {
+      padding: 0.8rem 0;
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--text-dark);
+    }
+
+    .badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: var(--highlight);
+      color: var(--text-dark);
+      padding: 0.3rem 0.6rem;
+      border-radius: 50px;
+      font-size: 0.75rem;
+      font-weight: bold;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--secondary);
+      color: var(--text-light);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 1.5rem 1rem;
+      }
+      
+      h1 {
+        font-size: 2rem;
+      }
+      
+      .popular-list {
+        grid-template-columns: 1fr;
+      }
+      
+      .game-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      }
+      
+      .button-group {
+        flex-direction: column;
+        align-items: center;
+      }
+    }  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-logo">Rizadman Store</div>
+      <div class="nav-links">
+        <a href="/login" class="nav-btn">Login</a>
+        <a href="/register" class="nav-btn register">Register</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <header>
+      <h1>Top Up Game Populer</h1>
+      <p class="subtitle">Layanan top up game termurah, cepat, dan terpercaya dengan proses otomatis 24 jam</p>
+    </header>
+
+    <section class="section">
+      <h2><i class="fas fa-fire"></i> Populer Saat Ini</h2>
+      <p>Game-game berikut sedang banyak diminati oleh pemain:</p>
+
+      <div class="popular-list">
+        <div class="popular-item">
+          <img src="https://i.pinimg.com/736x/82/55/03/8255033248d018b6c5f3d460b2deec16.jpg" alt="Mobile Legends">
+          <div class="popular-info">
+            <strong>Mobile Legends</strong>
+            <small>Moonton</small>
+          </div>
+          <span class="badge">Trending</span>
+        </div>
+        
+        <div class="popular-item">
+          <img src="https://i.pinimg.com/736x/67/c0/7e/67c07ead929b049e453bedda45980b79.jpg" alt="Valorant">
+          <div class="popular-info">
+            <strong>Valorant</strong>
+            <small>Riot Games</small>
+          </div>
+        </div>
+        
+        <div class="popular-item">
+          <img src="https://i.pinimg.com/736x/9b/aa/66/9baa66a3fb33bfcea3e8b791dee5d1c7.jpg" alt="Free Fire">
+          <div class="popular-info">
+            <strong>Free Fire</strong>
+            <small>Garena</small>
+          </div>
+          <span class="badge">Hot</span>
+        </div>
+        
+        <div class="popular-item">
+          <img src="https://i.pinimg.com/736x/a7/af/e5/a7afe560142b91117cdf633a3b2d9893.jpg" alt="Genshin Impact">
+          <div class="popular-info">
+            <strong>Genshin Impact</strong>
+            <small>Hoyoverse</small>
+          </div>
+        </div>
+        
+        <div class="popular-item">
+          <img src="https://i.pinimg.com/736x/62/73/86/6273861b81193778439d68dae7a26e71.jpg" alt="Call of Duty Mobile">
+          <div class="popular-info">
+            <strong>Call of Duty Mobile</strong>
+            <small>Tencent Games</small>
+          </div>
+        </div>
+        
+        <div class="popular-item">
+          <img src="https://i.pinimg.com/736x/2d/39/a5/2d39a5dc82c7daa18282c2ba38ec17f9.jpg" alt="PUBG Mobile">
+          <div class="popular-info">
+            <strong>PUBG Mobile</strong>
+            <small>Krafton</small>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2><i class="fas fa-bolt"></i> Layanan Kami</h2>
+      <div class="button-group">
+        <button class="btn"><i class="fas fa-gamepad"></i> Top Up Games</button>
+        <button class="btn"><i class="fas fa-film"></i> Sewa Aplikasi Nonton</button>
+        <button class="btn"><i class="fas fa-mobile-alt"></i> Pulsa & E-Wallet</button>
+        <button class="btn"><i class="fas fa-ticket-alt"></i> Voucher</button>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2><i class="fas fa-th-large"></i> Katalog Game</h2>
+      <div class="game-grid">
+        <div class="game-card">
+          <img src="https://i.pinimg.com/736x/82/55/03/8255033248d018b6c5f3d460b2deec16.jpg" alt="Mobile Legends">
+          <div class="game-label">MOBILE LEGENDS</div>
+        </div>
+        <div class="game-card">
+          <img src="https://i.pinimg.com/736x/9b/aa/66/9baa66a3fb33bfcea3e8b791dee5d1c7.jpg" alt="Free Fire">
+          <div class="game-label">FREE FIRE</div>
+        </div>
+        <div class="game-card">
+          <img src="https://i.pinimg.com/736x/67/c0/7e/67c07ead929b049e453bedda45980b79.jpg" alt="Valorant">
+          <div class="game-label">VALORANT</div>
+        </div>
+        <div class="game-card">
+          <img src="https://i.pinimg.com/736x/62/73/86/6273861b81193778439d68dae7a26e71.jpg" alt="CODM">
+          <div class="game-label">CALL OF DUTY</div>
+        </div>
+        <div class="game-card">
+          <img src="https://i.pinimg.com/736x/2d/39/a5/2d39a5dc82c7daa18282c2ba38ec17f9.jpg" alt="PUBG">
+          <div class="game-label">PUBG MOBILE</div>
+        </div>
+        <div class="game-card">
+          <img src="https://i.pinimg.com/736x/a7/af/e5/a7afe560142b91117cdf633a3b2d9893.jpg" alt="Genshin Impact">
+          <div class="game-label">GENSHIN IMPACT</div>
+        </div>
+        <div class="game-card">
+          <img src="https://i.pinimg.com/736x/34/66/03/346603fe9ff5b071463b03e550dac76a.jpg" alt="Honor of Kings">
+          <div class="game-label">HONOR OF KINGS</div>
+        </div>
+        <div class="game-card">
+          <img src="https://i.pinimg.com/736x/d0/93/26/d09326e7a5c0e0a216e802eab7c56f59.jpg" alt="Honkai Star Rail">
+          <div class="game-label">HONKAI: STAR RAIL</div>
+        </div>
+        <div class="game-card">
+          <img src="https://i.pinimg.com/736x/e2/e9/3e/e2e93ef7c30db437b956bd5c87fa725b.jpg" alt="Roblox">
+          <div class="game-label">ROBLOX</div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <p>&copy; 2023 Top Up Game Populer. All rights reserved.</p>
+      <p>Layanan top up game resmi dan terpercaya</p>
+    </footer>
+  </div>
+</body>
+</html>

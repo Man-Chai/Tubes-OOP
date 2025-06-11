@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Error</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f9;
+            color: #333;
+            line-height: 1.6;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .error-container {
+            max-width: 500px;
+            padding: 40px;
+            background-color: white;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+            text-align: center;
+            border-radius: 5px;
+        }
+        h1 {
+            color: #e74c3c;
+            margin: 0 0 15px 0;
+            font-size: 24px;
+        }
+        .error-code {
+            font-size: 72px;
+            font-weight: bold;
+            color: #e74c3c;
+            margin: 0;
+            line-height: 1;
+        }
+        p {
+            margin: 15px 0;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 15px;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+        .btn:hover {
+            background-color: #2980b9;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="error-container">
+        <div class="error-code" th:text="${errorCode ?: 'Error'}">Error</div>
+        <h1>Terjadi Kesalahan</h1>
+        <p>Maaf, terjadi kesalahan saat memproses permintaan Anda.</p>
+        <p th:if="${errorMessage}" th:text="${errorMessage}">Error message</p>
+        <p th:if="${requestUri}">URL: <span th:text="${requestUri}"></span></p>
+        <a href="/" class="btn">Kembali ke Beranda</a>
+    </div>
+</body>
+</html>
