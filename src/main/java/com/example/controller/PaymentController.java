@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -48,12 +47,7 @@ public class PaymentController {
 
     // Simpan metode pembayaran baru
     @PostMapping("/tambahPayment")
-    public String simpanPayment(@ModelAttribute("paymentBaru") Payment payment, BindingResult result, Authentication authentication) {
-        if (result.hasErrors()) {
-            System.out.println("Terjadi error binding: " + result);
-            return "tambahPayment";
-        }
-
+    public String simpanPayment(@ModelAttribute("paymentBaru") Payment payment, Authentication authentication) {
         if (authentication != null && (payment.getUsername() == null || payment.getUsername().trim().isEmpty())) {
             payment.setUsername(authentication.getName());
         }
