@@ -1,94 +1,423 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>User Dashboard</title>
+    <title>NEON DASH | User Portal</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Rajdhani:wght@500;700&display=swap');
+
+        :root {
+            --neon-pink: #ff2c9c;
+            --neon-blue: #00f7ff;
+            --neon-purple: #bd00ff;
+            --dark-bg: #0a0a12;
+            --darker-bg: #050508;
+            --panel-bg: rgba(15, 15, 25, 0.8);
+            --text-glow: 0 0 10px currentColor;
+        }
+
+        * {
             margin: 0;
-            padding: 20px;
-            background-color: #f5f5f5;
+            padding: 0;
+            box-sizing: border-box;
         }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: var(--dark-bg);
+            color: #fff;
+            min-height: 100vh;
+            padding: 20px;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(189, 0, 255, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(0, 247, 255, 0.1) 0%, transparent 20%),
+                linear-gradient(to bottom, var(--darker-bg), var(--dark-bg));
+            overflow-x: hidden;
+        }
+
         .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            background-color: white;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            max-width: 1200px;
+            margin: 30px auto;
+            background: var(--panel-bg);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 0 30px rgba(255, 44, 156, 0.3);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
         }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, var(--neon-pink), var(--neon-blue), var(--neon-purple));
+            z-index: -1;
+            border-radius: 14px;
+            animation: borderGlow 8s linear infinite;
+            background-size: 400%;
+        }
+
+        @keyframes borderGlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
         .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
+            position: relative;
         }
+
         h2 {
-            color: #333;
-            margin: 0;
-        }
-        .btn {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            color: var(--neon-blue);
+            text-shadow: var(--text-glow);
+            letter-spacing: 2px;
+            position: relative;
             display: inline-block;
-            padding: 8px 16px;
-            background-color: #007bff;
-            color: white;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--neon-blue);
+            box-shadow: 0 0 10px var(--neon-blue);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.5s ease;
+        }
+
+        h2:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        .welcome {
+            margin-top: 10px;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .welcome span {
+            color: var(--neon-pink);
+            text-shadow: var(--text-glow);
+            font-weight: 700;
+        }
+
+        .btn-container {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 6px;
             text-decoration: none;
-            border-radius: 4px;
-            margin-right: 10px;
+            font-weight: 700;
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
-        .btn-danger {
-            background-color: #dc3545;
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+            z-index: -1;
         }
+
+        .btn:hover::before {
+            transform: translateX(100%);
+        }
+
         .btn-success {
-            background-color: #28a745;
+            background-color: #00a878;
+            color: white;
+            text-shadow: 0 0 5px rgba(0, 168, 120, 0.7);
         }
+
+        .btn-success:hover {
+            background-color: #00c990;
+            box-shadow: 0 0 15px rgba(0, 200, 150, 0.5);
+        }
+
+        .btn-danger {
+            background-color: #ff2c5d;
+            color: white;
+            text-shadow: 0 0 5px rgba(255, 44, 93, 0.7);
+        }
+
+        .btn-danger:hover {
+            background-color: #ff3d6d;
+            box-shadow: 0 0 15px rgba(255, 61, 109, 0.5);
+        }
+
+        .btn-logout {
+            background-color: transparent;
+            border: 2px solid var(--neon-purple);
+            color: var(--neon-purple);
+            text-shadow: 0 0 5px var(--neon-purple);
+        }
+
+        .btn-logout:hover {
+            background-color: var(--neon-purple);
+            color: white;
+            box-shadow: 0 0 15px rgba(189, 0, 255, 0.5);
+        }
+
+        h3 {
+            color: var(--neon-pink);
+            margin-bottom: 20px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            letter-spacing: 1px;
+            text-shadow: var(--text-glow);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50%;
+            height: 2px;
+            background: var(--neon-pink);
+            box-shadow: 0 0 5px var(--neon-pink);
+        }
+
         table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
+            position: relative;
+            z-index: 1;
         }
+
         th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
+            padding: 15px;
             text-align: left;
+            position: relative;
         }
+
         th {
-            background-color: #f2f2f2;
+            background-color: rgba(30, 30, 45, 0.8);
+            color: var(--neon-blue);
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            border-bottom: 2px solid var(--neon-blue);
         }
+
+        tr {
+            background-color: rgba(20, 20, 35, 0.6);
+            transition: all 0.3s ease;
+        }
+
         tr:nth-child(even) {
-            background-color: #f9f9f9;
+            background-color: rgba(25, 25, 40, 0.6);
         }
-        .welcome {
-            color: #666;
-            margin-bottom: 20px;
+
+        tr:hover {
+            background-color: rgba(40, 40, 60, 0.8);
+            transform: translateX(5px);
+            box-shadow: 0 0 15px rgba(0, 247, 255, 0.2);
+        }
+
+        td {
+            color: #ddd;
+            font-weight: 500;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .status-pending {
+            color: #ffcc00;
+            text-shadow: 0 0 5px rgba(255, 204, 0, 0.5);
+        }
+
+        .status-completed {
+            color: #00cc66;
+            text-shadow: 0 0 5px rgba(0, 204, 102, 0.5);
+        }
+
+        .status-failed {
+            color: #ff3333;
+            text-shadow: 0 0 5px rgba(255, 51, 51, 0.5);
+        }
+
+        .no-data {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.5);
+            padding: 30px;
+            font-style: italic;
+            background-color: rgba(15, 15, 25, 0.5);
+            border-radius: 8px;
+        }
+
+        .grid-lines {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(255, 44, 156, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 44, 156, 0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.5;
+        }
+
+        .cyberpunk-checkbox {
+            display: none;
+        }
+
+        .cyberpunk-checkbox + label {
+            position: relative;
+            display: inline-block;
+            padding-left: 35px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .cyberpunk-checkbox + label:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 24px;
+            height: 24px;
+            border: 2px solid var(--neon-blue);
+            background-color: transparent;
+            box-shadow: 0 0 5px var(--neon-blue);
+        }
+
+        .cyberpunk-checkbox:checked + label:after {
+            content: '✓';
+            position: absolute;
+            left: 5px;
+            top: -5px;
+            color: var(--neon-pink);
+            font-size: 24px;
+            text-shadow: 0 0 5px var(--neon-pink);
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 20px;
+            }
+            
+            .btn-container {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+            
+            table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+
+        /* Animated background elements */
+        .corner-decoration {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border: 2px solid var(--neon-purple);
+            opacity: 0.3;
+        }
+
+        .corner-decoration:nth-child(1) {
+            top: 20px;
+            left: 20px;
+            border-right: none;
+            border-bottom: none;
+            animation: pulse 4s infinite;
+        }
+
+        .corner-decoration:nth-child(2) {
+            bottom: 20px;
+            right: 20px;
+            border-left: none;
+            border-top: none;
+            animation: pulse 4s infinite 2s;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.3; }
+            50% { opacity: 0.7; }
+            100% { opacity: 0.3; }
         }
     </style>
 </head>
 <body>
     <div class="container">
+        <div class="grid-lines"></div>
+        <div class="corner-decoration"></div>
+        <div class="corner-decoration"></div>
+        
         <div class="header">
             <div>
-                <h2>User Dashboard</h2>
-                <p class="welcome">Selamat datang, <span th:text="${username}"></span>!</p>
+                <h2>NEON DASH</h2>
+                <p class="welcome">ACCESS GRANTED TO: <span th:text="${username}"></span></p>
             </div>
             <div>
-                <a href="/" class="btn btn-danger">Logout</a>
+                <a href="/" class="btn btn-logout">TERMINATE SESSION</a>
             </div>
         </div>
         
-        <div style="margin-bottom: 20px;">
-            <a href="/tambah" class="btn btn-success">Tambah Transaksi</a>
-            <a th:href="@{/tambahPayment}" class="btn btn-danger">Checkout</a>
+        <div class="btn-container">
+            <a href="/tambah" class="btn btn-success">+ NEW TRANSACTION</a>
+            <a th:href="@{/tambahPayment}" class="btn btn-danger">PROCEED TO CHECKOUT</a>
         </div>
         
-        <h3>Transaksi Anda</h3>
+        <h3>TRANSACTION LOG</h3>
         <table>
             <thead>
                 <tr>
-                    <th>Game</th>
-                    <th>Nominal</th>
-                    <th>Harga</th>
-                    <th>Status</th>
+                    <th>GAME ID</th>
+                    <th>VALUE</th>
+                    <th>CREDITS</th>
+                    <th>STATUS</th>
                 </tr>
             </thead>
             <tbody>
@@ -96,13 +425,55 @@
                     <td th:text="${topup.game}"></td>
                     <td th:text="${topup.nominal}"></td>
                     <td th:text="${topup.harga}"></td>
+                    <td class="status-completed">COMPLETED</td>
                 </tr>
                 <tr th:if="${#lists.isEmpty(topups)}">
-                    <td colspan="3" style="text-align: center; color: #666;">Belum ada transaksi</td>
+                    <td colspan="4" class="no-data">NO TRANSACTION RECORDS FOUND</td>
                 </tr>
             </tbody>
         </table>
     </div>
+
+    <script>
+        // Add subtle animation to table rows
+        document.addEventListener('DOMContentLoaded', function() {
+            const rows = document.querySelectorAll('tbody tr');
+            rows.forEach((row, index) => {
+                row.style.opacity = '0';
+                row.style.transform = 'translateX(-20px)';
+                row.style.transition = `all 0.5s ease ${index * 0.1}s`;
+                setTimeout(() => {
+                    row.style.opacity = '1';
+                    row.style.transform = 'translateX(0)';
+                }, 100);
+            });
+            
+            // Add glitch effect to header
+            const header = document.querySelector('h2');
+            let glitchInterval;
+            
+            header.addEventListener('mouseenter', () => {
+                let counter = 0;
+                glitchInterval = setInterval(() => {
+                    if (counter++ > 3) {
+                        clearInterval(glitchInterval);
+                        header.style.textShadow = '0 0 10px var(--neon-blue)';
+                        return;
+                    }
+                    const x = Math.random() * 5 - 2.5;
+                    const y = Math.random() * 5 - 2.5;
+                    const color = `hsl(${Math.random() * 60 + 180}, 100%, 70%)`;
+                    header.style.transform = `translate(${x}px, ${y}px)`;
+                    header.style.textShadow = `0 0 5px ${color}`;
+                }, 50);
+            });
+            
+            header.addEventListener('mouseleave', () => {
+                clearInterval(glitchInterval);
+                header.style.transform = 'translate(0, 0)';
+                header.style.textShadow = '0 0 10px var(--neon-blue)';
+            });
+        });
+    </script>
 </body>
 </html>
-

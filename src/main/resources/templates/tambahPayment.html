@@ -2,101 +2,293 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Tambah Metode Pembayaran</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        body {
-            font-family: Arial, sans-serif;
+        :root {
+            --primary-color: #4361ee;
+            --primary-hover: #3a56d4;
+            --secondary-color: #6c757d;
+            --secondary-hover: #5a6268;
+            --success-color: #4cc9f0;
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --text-color: #2b2d42;
+            --text-light: #8d99ae;
+            --input-bg: #ffffff;
+            --input-border: #e9ecef;
+            --input-focus: #4361ee;
+            --border-radius: 10px;
+            --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * {
+            box-sizing: border-box;
             margin: 0;
-            padding: 20px;
-            background-color: #f5f5f5;
+            padding: 0;
         }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 20px;
+        }
+
         .container {
-            max-width: 500px;
-            margin: 0 auto;
-            background-color: white;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            max-width: 520px;
+            margin: 40px auto;
+            background-color: var(--card-bg);
+            padding: 40px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
         }
+
+        .container:hover {
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+        }
+
         h2 {
-            color: #333;
-            margin-bottom: 20px;
+            color: var(--primary-color);
+            margin-bottom: 30px;
             text-align: center;
+            font-size: 1.8rem;
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 15px;
         }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--success-color));
+            border-radius: 2px;
+        }
+
         .form-group {
-            margin-bottom: 15px;
+            margin-bottom: 25px;
+            position: relative;
         }
+
         label {
             display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--text-color);
+            font-size: 0.95rem;
         }
+
+        .input-icon {
+            position: relative;
+        }
+
+        .input-icon i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-light);
+            font-size: 1rem;
+        }
+
         input[type="text"],
-        input[type="number"],
         select {
             width: 100%;
-            padding: 8px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            box-sizing: border-box;
+            padding: 14px 20px 14px 45px;
+            font-size: 0.95rem;
+            border: 1px solid var(--input-border);
+            border-radius: var(--border-radius);
+            background-color: var(--input-bg);
+            transition: var(--transition);
+            color: var(--text-color);
+            appearance: none;
         }
-        button {
-            display: inline-block;
-            padding: 10px 15px;
-            background-color: #28a745;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
+
+        .input-icon input[type="text"] {
+            padding-left: 45px;
         }
-        button:hover {
-            background-color: #218838;
+
+        input[type="text"]:focus,
+        select:focus {
+            border-color: var(--input-focus);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.15);
         }
+
+        input[readonly] {
+            background-color: #f8f9fa;
+            cursor: not-allowed;
+            color: var(--text-light);
+        }
+
+        select {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%238d99ae' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            background-size: 12px;
+            padding-right: 35px;
+        }
+
         .actions {
             display: flex;
+            flex-wrap: wrap;
             justify-content: space-between;
-            margin-top: 20px;
+            margin-top: 35px;
+            gap: 15px;
         }
-        .back-link {
-            display: inline-block;
-            padding: 10px 15px;
-            background-color: #6c757d;
-            color: white;
+
+        .back-link,
+        button {
+            flex: 1;
+            min-width: 120px;
+            padding: 14px 20px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            text-align: center;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
             text-decoration: none;
-            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .back-link {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        .back-link:hover {
+            background-color: var(--secondary-hover);
+            transform: translateY(-2px);
+        }
+
+        button {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        button:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-2px);
+        }
+
+        .payment-method-icon {
+            margin-right: 10px;
+            font-size: 1.1rem;
+        }
+
+        @media (max-width: 576px) {
+            .container {
+                padding: 30px 25px;
+                margin: 20px auto;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+            
+            .actions {
+                flex-direction: column;
+            }
+            
+            .back-link,
+            button {
+                width: 100%;
+            }
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .container {
+            animation: fadeIn 0.5s ease-out;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h2>Form Tambah Metode Pembayaran</h2>
+        <h2>Tambah Metode Pembayaran</h2>
         <form method="post" th:action="@{/tambahPayment}" th:object="${paymentBaru}">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+
             <div class="form-group">
-                <label>Username:</label>
-                <input type="text" th:field="*{username}" readonly>
+                <label for="username">Username</label>
+                <div class="input-icon">
+                    <i class="fas fa-user"></i>
+                    <input type="text" id="username" name="username" th:value="${paymentBaru.username}" readonly>
+                </div>
             </div>
+
             <div class="form-group">
-                <label>ID Transaksi:</label>
-                <select th:field="*{idgame}" class="form-control">
-                    <option th:each="topup : ${topups}"
-                            th:value="${topup.id}"
-                            th:text="${topup.game + ' (' + topup.harga + ')'}">
-                    </option>
-                </select>
+                <label for="idgame">ID Transaksi</label>
+                <div class="input-icon">
+                    <i class="fas fa-gamepad"></i>
+                    <select id="idgame" th:field="*{idgame}">
+                        <option th:each="topup : ${topups}"
+                                th:value="${topup.id}"
+                                th:text="${topup.game + ' (' + topup.harga + ')'}">
+                        </option>
+                    </select>
+                </div>
             </div>
+
             <div class="form-group">
-                <label>Metode Pembayaran:</label>
-                <select th:field="*{metode}" class="form-control">
-                    <option value=''>Pilih Metode</option>
-                    <option value='qris'>QRIS</option>
-                    <option value='va'>Virtual Account</option>
-                    <option value='deborcred'>Kartu Debit atau Kredit</option>
-                </select>
+                <label for="metode">Metode Pembayaran</label>
+                <div class="input-icon">
+                    <i class="fas fa-credit-card"></i>
+                    <select id="metode" th:field="*{metode}">
+                        <option value="">Pilih Metode</option>
+                        <option value="qris">
+                            <i class="fas fa-qrcode payment-method-icon"></i> QRIS
+                        </option>
+                        <option value="va">
+                            <i class="fas fa-university payment-method-icon"></i> Virtual Account
+                        </option>
+                        <option value="deborcred">
+                            <i class="fas fa-credit-card payment-method-icon"></i> Kartu Debit/Kredit
+                        </option>
+                    </select>
+                </div>
             </div>
+
             <div class="actions">
-                <a href="/user" class="back-link">Kembali</a>
-                <button type="submit">Simpan</button>
+                <a href="/user" class="back-link">
+                    <i class="fas fa-arrow-left"></i> Kembali
+                </a>
+                <button type="submit">
+                    <i class="fas fa-save"></i> Simpan
+                </button>
             </div>
         </form>
     </div>
+
+    <script>
+        // Add subtle animation to form elements on focus
+        document.querySelectorAll('input, select').forEach(element => {
+            element.addEventListener('focus', function() {
+                this.parentElement.style.transform = 'scale(1.01)';
+            });
+            
+            element.addEventListener('blur', function() {
+                this.parentElement.style.transform = 'scale(1)';
+            });
+        });
+    </script>
 </body>
 </html>

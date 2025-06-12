@@ -3,118 +3,291 @@
 <head>
     <title>Tambah Transaksi</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Poppins:wght@400;500;600&display=swap');
+
+        * {
             margin: 0;
-            padding: 20px;
-            background-color: #f5f5f5;
-        }
-        .container {
-            max-width: 500px;
-            margin: 0 auto;
-            background-color: white;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        h2 {
-            color: #333;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-        input[type="text"],
-        input[type="number"],
-        select {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
+            padding: 0;
             box-sizing: border-box;
         }
-        button {
-            display: inline-block;
-            padding: 10px 15px;
-            background-color: #28a745;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
+            color: #fff;
+            padding: 50px 20px;
+            min-height: 100vh;
         }
-        button:hover {
-            background-color: #218838;
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background-color: #151515;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(0, 150, 255, 0.3);
+            border: 1px solid rgba(0, 150, 255, 0.1);
         }
+
+        h2 {
+            text-align: center;
+            color: #00bfff;
+            margin-bottom: 30px;
+            font-family: 'Orbitron', sans-serif;
+            text-shadow: 0 0 10px rgba(0, 191, 255, 0.5);
+            letter-spacing: 1px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+            position: relative;
+            animation: fadeIn 0.5s ease forwards;
+            opacity: 0;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #00bfff;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="email"],
+        select {
+            width: 100%;
+            padding: 12px 15px;
+            background-color: #1f1f1f;
+            border: 2px solid #333;
+            color: #fff;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        input[type="email"]:focus,
+        select:focus {
+            border-color: #00bfff;
+            outline: none;
+            box-shadow: 0 0 10px rgba(0, 191, 255, 0.3);
+        }
+
+        input[readonly] {
+            background-color: #2a2a2a;
+            color: #aaa;
+        }
+
+        select {
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2300bfff'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            background-size: 15px;
+        }
+
         .actions {
             display: flex;
             justify-content: space-between;
-            margin-top: 20px;
+            align-items: center;
+            margin-top: 40px;
         }
-        .back-link {
-            display: inline-block;
-            padding: 10px 15px;
-            background-color: #6c757d;
-            color: white;
+
+        .back-link,
+        button {
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 14px;
             text-decoration: none;
-            border-radius: 4px;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .back-link {
+            background-color: transparent;
+            color: #00bfff;
+            border: 2px solid #00bfff;
+        }
+
+        .back-link:hover {
+            background-color: rgba(0, 191, 255, 0.1);
+            box-shadow: 0 0 15px rgba(0, 191, 255, 0.2);
+        }
+
+        button {
+            background-color: #00bfff;
+            color: #111;
+            border: 2px solid #00bfff;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        button:hover {
+            background-color: #009acd;
+            box-shadow: 0 0 20px rgba(0, 191, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .price-display {
+            font-size: 24px;
+            text-align: center;
+            margin: 20px 0;
+            color: #00ffaa;
+            font-weight: bold;
+            text-shadow: 0 0 10px rgba(0, 255, 170, 0.3);
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            body {
+                padding: 30px 15px;
+            }
+            
+            .container {
+                padding: 25px;
+            }
+            
+            h2 {
+                font-size: 22px;
+            }
+            
+            .actions {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .back-link, button {
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        /* Validation styles */
+        .error-message {
+            color: #ff4444;
+            font-size: 12px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        input:invalid, select:invalid {
+            border-color: #ff4444;
+        }
+
+        input:invalid + .error-message, 
+        select:invalid + .error-message {
+            display: block;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h2>Form Tambah Transaksi</h2>
-        <form method="post" th:action="@{/tambah}" th:object="${topUp}">
-            <div class="form-group">
-                <label>Username:</label>
-                <input type="text" name="username" th:value="${topUp.username}" readonly>
+        <h2>FORM TAMBAH TRANSAKSI</h2>
+        <form method="post" th:action="@{/tambah}" th:object="${topUp}" id="transactionForm">
+            <div class="form-group" style="animation-delay: 0.1s">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" th:value="${topUp.username}" readonly>
             </div>
 
-            <div class="form-group">
-                <label>Game:</label>
-                <select name="game" id="gameSelect" class="form-control" onchange="updateHarga()">
+            <div class="form-group" style="animation-delay: 0.2s">
+                <label for="gameSelect">Game:</label>
+                <select id="gameSelect" name="game" required onchange="updatePrice()">
+                    <option value="" disabled selected>-- Pilih Game --</option>
                     <option th:each="item : ${items}"
                             th:value="${item.namaItem}"
                             th:data-harga="${item.hargaItem}"
-                            th:text="${item.namaItem + ' (' + item.hargaItem + ')'}">
+                            th:text="${item.namaItem}">
                     </option>
                 </select>
+                <div class="error-message">Silakan pilih game</div>
             </div>
 
-            <div class="form-group">
-                <label>Nominal:</label>
-                <input type="number" name="nominal" id="nominalInput" class="form-control" value="1" onchange="updateHarga()" required>
+            <div class="form-group" style="animation-delay: 0.3s">
+                <label for="nominalInput">Jumlah:</label>
+                <input type="number" id="nominalInput" name="nominal" min="1" value="1" required onchange="updatePrice()">
+                <div class="error-message">Jumlah minimal 1</div>
             </div>
 
-            <div class="form-group">
-                <label>Harga Total:</label>
-                <input type="number" name="harga" id="hargaInput" class="form-control" readonly>
+            <div class="form-group" style="animation-delay: 0.4s">
+                <label for="hargaInput">Harga Satuan:</label>
+                <input type="text" id="hargaSatuan" readonly>
             </div>
 
-            <div class="actions">
+            <div class="price-display">
+                Total: <span id="totalPrice">Rp 0</span>
+            </div>
+
+            <input type="hidden" id="hargaInput" name="harga">
+
+            <div class="actions" style="animation-delay: 0.5s">
                 <a href="/user" class="back-link">Kembali</a>
-                <button type="submit">Simpan</button>
+                <button type="submit">Simpan Transaksi</button>
             </div>
         </form>
 
         <script>
-            function updateHarga() {
-                const select = document.getElementById("gameSelect");
-                const selectedOption = select.options[select.selectedIndex];
-                const hargaPerItem = parseInt(selectedOption.getAttribute("data-harga")) || 0;
-                const nominal = parseInt(document.getElementById("nominalInput").value) || 0;
-                document.getElementById("hargaInput").value = hargaPerItem * nominal;
+            // Format currency
+            function formatRupiah(angka) {
+                return 'Rp ' + angka.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
             }
 
-            // Panggil saat pertama load
-            window.onload = updateHarga;
-        </script>
+            // Update price calculation
+            function updatePrice() {
+                const gameSelect = document.getElementById('gameSelect');
+                const nominalInput = document.getElementById('nominalInput');
+                const hargaSatuan = document.getElementById('hargaSatuan');
+                const totalPrice = document.getElementById('totalPrice');
+                const hargaInput = document.getElementById('hargaInput');
+                
+                if (gameSelect.selectedIndex > 0) {
+                    const selectedOption = gameSelect.options[gameSelect.selectedIndex];
+                    const pricePerUnit = parseInt(selectedOption.getAttribute('data-harga')) || 0;
+                    const quantity = parseInt(nominalInput.value) || 0;
+                    const total = pricePerUnit * quantity;
+                    
+                    hargaSatuan.value = formatRupiah(pricePerUnit);
+                    totalPrice.textContent = formatRupiah(total);
+                    hargaInput.value = total;
+                } else {
+                    hargaSatuan.value = '';
+                    totalPrice.textContent = 'Rp 0';
+                    hargaInput.value = '';
+                }
+            }
 
+            // Initialize form
+            document.addEventListener('DOMContentLoaded', function() {
+                // Set animation delays
+                const formGroups = document.querySelectorAll('.form-group');
+                formGroups.forEach((group, index) => {
+                    group.style.animationDelay = `${0.1 + (index * 0.1)}s`;
+                });
+                
+                // Form validation
+                const form = document.getElementById('transactionForm');
+                form.addEventListener('submit', function(event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                });
+                
+                // Initial price update
+                updatePrice();
+            });
+        </script>
     </div>
 </body>
 </html>

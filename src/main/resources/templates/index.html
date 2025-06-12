@@ -8,61 +8,62 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <style>
     .navbar {
-  background: rgba(255, 255, 255, 0); /* semi transparan putih */
-  backdrop-filter: blur(10px); /* blur efek latar */
-  padding: 1rem 1.5rem;
-  box-shadow: none; /* hapus shadow */
-  margin-bottom: 1rem;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-}
+      background: rgba(255, 255, 255, 0);
+      backdrop-filter: blur(10px);
+      padding: 1rem 1.5rem;
+      box-shadow: none;
+      margin-bottom: 1rem;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
 
-.nav-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  max-width: 1300px;
-  margin: 0 auto;
-}
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
 
-.nav-logo {
-  font-size: 1.4rem;
-  font-weight: bold;
-  color: var(--primary);
-}
+    .nav-logo {
+      font-size: 1.4rem;
+      font-weight: bold;
+      color: var(--primary);
+    }
 
-.nav-links {
-  display: flex;
-  gap: 1rem;
-}
+    .nav-links {
+      display: flex;
+      gap: 1rem;
+    }
 
-.nav-btn {
-  padding: 0.5rem 1.2rem;
-  border-radius: 50px;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 0.95rem;
-  transition: var(--transition);
-  background: var(--white);
-  color: var(--primary);
-  border: 2px solid var(--primary);
-}
+    .nav-btn {
+      padding: 0.5rem 1.2rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: var(--transition);
+      background: var(--white);
+      color: var(--primary);
+      border: 2px solid var(--primary);
+    }
 
-.nav-btn:hover {
-  background: var(--primary);
-  color: var(--white);
-}
+    .nav-btn:hover {
+      background: var(--primary);
+      color: var(--white);
+    }
 
-.nav-btn.register {
-  background: var(--primary);
-  color: var(--white);
-  border: none;
-}
+    .nav-btn.register {
+      background: var(--primary);
+      color: var(--white);
+      border: none;
+    }
 
-.nav-btn.register:hover {
-  background: var(--primary-dark);
-}
+    .nav-btn.register:hover {
+      background: var(--primary-dark);
+    }
+    
     :root {
       --primary: #000000;
       --primary-dark: #eb9411;
@@ -77,13 +78,13 @@
       --shadow: 0 4px 12px rgba(0,0,0,0.1);
       --transition: all 0.3s ease;
     }
+    
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
 
-   
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: url('https://i.pinimg.com/originals/56/60/6e/56606ef5c5860bb627eec04fc19005ca.gif') no-repeat center center fixed;
@@ -155,6 +156,7 @@
       align-items: center;
       gap: 1rem;
       transition: var(--transition);
+      cursor: pointer;
     }
 
     .popular-item:hover {
@@ -231,6 +233,7 @@
       text-align: center;
       position: relative;
       transition: var(--transition);
+      cursor: pointer;
     }
 
     .game-card:hover {
@@ -273,6 +276,127 @@
       font-size: 0.9rem;
     }
 
+    /* Modal/Popup Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      z-index: 2000;
+      overflow-y: auto;
+    }
+
+    .modal-content {
+      background-color: var(--white);
+      margin: 5% auto;
+      padding: 2rem;
+      border-radius: var(--card-radius);
+      width: 90%;
+      max-width: 600px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      position: relative;
+      animation: modalopen 0.4s;
+    }
+
+    @keyframes modalopen {
+      from {opacity: 0; transform: translateY(-50px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      font-size: 1.5rem;
+      color: var(--text-dark);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .close-btn:hover {
+      color: var(--accent);
+      transform: rotate(90deg);
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #eee;
+    }
+
+    .modal-header img {
+      width: 60px;
+      height: 60px;
+      border-radius: 12px;
+      margin-right: 1rem;
+      border: 2px solid var(--secondary);
+    }
+
+    .modal-header h3 {
+      font-size: 1.5rem;
+      color: var(--primary);
+    }
+
+    .modal-header p {
+      color: var(--text-light);
+      font-size: 0.9rem;
+    }
+
+    .item-list {
+      margin-top: 1.5rem;
+    }
+
+    .item-card {
+      background: #f9f9f9;
+      border-radius: 10px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: var(--transition);
+    }
+
+    .item-card:hover {
+      background: #f0f0f0;
+    }
+
+    .item-info h4 {
+      font-size: 1.1rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .item-info p {
+      color: var(--text-light);
+      font-size: 0.9rem;
+    }
+
+    .item-price {
+      font-weight: bold;
+      color: var(--primary);
+      font-size: 1.2rem;
+    }
+
+    .buy-btn {
+      background: var(--primary);
+      color: var(--white);
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: var(--transition);
+    }
+
+    .buy-btn:hover {
+      background: var(--primary-dark);
+    }
+
     @media (max-width: 768px) {
       .container {
         padding: 1.5rem 1rem;
@@ -294,7 +418,14 @@
         flex-direction: column;
         align-items: center;
       }
-    }  </style>
+      
+      .modal-content {
+        width: 95%;
+        margin: 10% auto;
+        padding: 1.5rem;
+      }
+    }
+  </style>
 </head>
 <body>
   <nav class="navbar">
@@ -318,7 +449,7 @@
       <p>Game-game berikut sedang banyak diminati oleh pemain:</p>
 
       <div class="popular-list">
-        <div class="popular-item">
+        <div class="popular-item" onclick="openModal('mobile-legends')">
           <img src="https://i.pinimg.com/736x/82/55/03/8255033248d018b6c5f3d460b2deec16.jpg" alt="Mobile Legends">
           <div class="popular-info">
             <strong>Mobile Legends</strong>
@@ -327,7 +458,7 @@
           <span class="badge">Trending</span>
         </div>
         
-        <div class="popular-item">
+        <div class="popular-item" onclick="openModal('valorant')">
           <img src="https://i.pinimg.com/736x/67/c0/7e/67c07ead929b049e453bedda45980b79.jpg" alt="Valorant">
           <div class="popular-info">
             <strong>Valorant</strong>
@@ -335,7 +466,7 @@
           </div>
         </div>
         
-        <div class="popular-item">
+        <div class="popular-item" onclick="openModal('free-fire')">
           <img src="https://i.pinimg.com/736x/9b/aa/66/9baa66a3fb33bfcea3e8b791dee5d1c7.jpg" alt="Free Fire">
           <div class="popular-info">
             <strong>Free Fire</strong>
@@ -344,7 +475,7 @@
           <span class="badge">Hot</span>
         </div>
         
-        <div class="popular-item">
+        <div class="popular-item" onclick="openModal('genshin-impact')">
           <img src="https://i.pinimg.com/736x/a7/af/e5/a7afe560142b91117cdf633a3b2d9893.jpg" alt="Genshin Impact">
           <div class="popular-info">
             <strong>Genshin Impact</strong>
@@ -352,7 +483,7 @@
           </div>
         </div>
         
-        <div class="popular-item">
+        <div class="popular-item" onclick="openModal('codm')">
           <img src="https://i.pinimg.com/736x/62/73/86/6273861b81193778439d68dae7a26e71.jpg" alt="Call of Duty Mobile">
           <div class="popular-info">
             <strong>Call of Duty Mobile</strong>
@@ -360,7 +491,7 @@
           </div>
         </div>
         
-        <div class="popular-item">
+        <div class="popular-item" onclick="openModal('pubg')">
           <img src="https://i.pinimg.com/736x/2d/39/a5/2d39a5dc82c7daa18282c2ba38ec17f9.jpg" alt="PUBG Mobile">
           <div class="popular-info">
             <strong>PUBG Mobile</strong>
@@ -383,40 +514,40 @@
     <section class="section">
       <h2><i class="fas fa-th-large"></i> Katalog Game</h2>
       <div class="game-grid">
-        <div class="game-card">
+        <div class="game-card" onclick="openModal('mobile-legends')">
           <img src="https://i.pinimg.com/736x/82/55/03/8255033248d018b6c5f3d460b2deec16.jpg" alt="Mobile Legends">
           <div class="game-label">MOBILE LEGENDS</div>
         </div>
-        <div class="game-card">
+        <div class="game-card" onclick="openModal('free-fire')">
           <img src="https://i.pinimg.com/736x/9b/aa/66/9baa66a3fb33bfcea3e8b791dee5d1c7.jpg" alt="Free Fire">
           <div class="game-label">FREE FIRE</div>
         </div>
-        <div class="game-card">
+        <div class="game-card" onclick="openModal('valorant')">
           <img src="https://i.pinimg.com/736x/67/c0/7e/67c07ead929b049e453bedda45980b79.jpg" alt="Valorant">
           <div class="game-label">VALORANT</div>
         </div>
-        <div class="game-card">
+        <div class="game-card" onclick="openModal('codm')">
           <img src="https://i.pinimg.com/736x/62/73/86/6273861b81193778439d68dae7a26e71.jpg" alt="CODM">
           <div class="game-label">CALL OF DUTY</div>
         </div>
-        <div class="game-card">
+        <div class="game-card" onclick="openModal('pubg')">
           <img src="https://i.pinimg.com/736x/2d/39/a5/2d39a5dc82c7daa18282c2ba38ec17f9.jpg" alt="PUBG">
           <div class="game-label">PUBG MOBILE</div>
         </div>
-        <div class="game-card">
+        <div class="game-card" onclick="openModal('genshin-impact')">
           <img src="https://i.pinimg.com/736x/a7/af/e5/a7afe560142b91117cdf633a3b2d9893.jpg" alt="Genshin Impact">
           <div class="game-label">GENSHIN IMPACT</div>
         </div>
-        <div class="game-card">
+        <div class="game-card" onclick="openModal('honor-of-kings')">
           <img src="https://i.pinimg.com/736x/34/66/03/346603fe9ff5b071463b03e550dac76a.jpg" alt="Honor of Kings">
           <div class="game-label">HONOR OF KINGS</div>
         </div>
-        <div class="game-card">
-          <img src="https://i.pinimg.com/736x/d0/93/26/d09326e7a5c0e0a216e802eab7c56f59.jpg" alt="Honkai Star Rail">
+        <div class="game-card" onclick="openModal('honkai-star-rail')">
+          <img src="https://i.pinimg.com/736x/91/00/49/910049f3b026069751c3088c67a90393.jpg" alt="Honkai Star Rail">
           <div class="game-label">HONKAI: STAR RAIL</div>
         </div>
-        <div class="game-card">
-          <img src="https://i.pinimg.com/736x/e2/e9/3e/e2e93ef7c30db437b956bd5c87fa725b.jpg" alt="Roblox">
+        <div class="game-card" onclick="openModal('roblox')">
+          <img src="https://i.pinimg.com/736x/49/00/7f/49007fdfdbedef52909eebeb2499052f.jpg" alt="Roblox">
           <div class="game-label">ROBLOX</div>
         </div>
       </div>
@@ -427,5 +558,190 @@
       <p>Layanan top up game resmi dan terpercaya</p>
     </footer>
   </div>
+
+  <!-- Modal/Popup -->
+  <div id="gameModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal()">&times;</span>
+      <div class="modal-header">
+        <img id="modalGameImage" src="" alt="Game Image">
+        <div>
+          <h3 id="modalGameTitle">Game Title</h3>
+          <p id="modalGameDeveloper">Developer</p>
+        </div>
+      </div>
+      <div class="item-list" id="itemList">
+        <!-- Item list will be populated by JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Game data with items
+    const gameData = {
+      'mobile-legends': {
+        title: 'Mobile Legends',
+        developer: 'Moonton',
+        image: 'https://i.pinimg.com/736x/82/55/03/8255033248d018b6c5f3d460b2deec16.jpg',
+        items: [
+          { name: '86 Diamond', price: 'Rp 20.000' },
+          { name: '172 Diamond', price: 'Rp 40.000' },
+          { name: '257 Diamond', price: 'Rp 60.000' },
+          { name: '344 Diamond', price: 'Rp 80.000' },
+          { name: '429 Diamond', price: 'Rp 100.000' },
+          { name: '514 Diamond', price: 'Rp 120.000' }
+        ]
+      },
+      'valorant': {
+        title: 'Valorant',
+        developer: 'Riot Games',
+        image: 'https://i.pinimg.com/736x/67/c0/7e/67c07ead929b049e453bedda45980b79.jpg',
+        items: [
+          { name: '125 VP', price: 'Rp 25.000' },
+          { name: '420 VP', price: 'Rp 75.000' },
+          { name: '700 VP', price: 'Rp 125.000' },
+          { name: '1375 VP', price: 'Rp 250.000' },
+          { name: '2400 VP', price: 'Rp 400.000' },
+          { name: '4000 VP', price: 'Rp 650.000' }
+        ]
+      },
+      'free-fire': {
+        title: 'Free Fire',
+        developer: 'Garena',
+        image: 'https://i.pinimg.com/736x/9b/aa/66/9baa66a3fb33bfcea3e8b791dee5d1c7.jpg',
+        items: [
+          { name: '70 Diamond', price: 'Rp 10.000' },
+          { name: '140 Diamond', price: 'Rp 20.000' },
+          { name: '355 Diamond', price: 'Rp 50.000' },
+          { name: '720 Diamond', price: 'Rp 100.000' },
+          { name: '1450 Diamond', price: 'Rp 200.000' },
+          { name: '2180 Diamond', price: 'Rp 300.000' }
+        ]
+      },
+      'genshin-impact': {
+        title: 'Genshin Impact',
+        developer: 'Hoyoverse',
+        image: 'https://i.pinimg.com/736x/a7/af/e5/a7afe560142b91117cdf633a3b2d9893.jpg',
+        items: [
+          { name: '60 Genesis Crystal', price: 'Rp 15.000' },
+          { name: '300 Genesis Crystal', price: 'Rp 75.000' },
+          { name: '980 Genesis Crystal', price: 'Rp 245.000' },
+          { name: '1980 Genesis Crystal', price: 'Rp 490.000' },
+          { name: '3280 Genesis Crystal', price: 'Rp 815.000' },
+          { name: '6480 Genesis Crystal', price: 'Rp 1.600.000' }
+        ]
+      },
+      'codm': {
+        title: 'Call of Duty Mobile',
+        developer: 'Tencent Games',
+        image: 'https://i.pinimg.com/736x/62/73/86/6273861b81193778439d68dae7a26e71.jpg',
+        items: [
+          { name: '80 CP', price: 'Rp 20.000' },
+          { name: '400 CP', price: 'Rp 100.000' },
+          { name: '800 CP', price: 'Rp 200.000' },
+          { name: '2000 CP', price: 'Rp 500.000' },
+          { name: '4000 CP', price: 'Rp 1.000.000' },
+          { name: '8000 CP', price: 'Rp 2.000.000' }
+        ]
+      },
+      'pubg': {
+        title: 'PUBG Mobile',
+        developer: 'Krafton',
+        image: 'https://i.pinimg.com/736x/2d/39/a5/2d39a5dc82c7daa18282c2ba38ec17f9.jpg',
+        items: [
+          { name: '50 UC', price: 'Rp 10.000' },
+          { name: '250 UC', price: 'Rp 50.000' },
+          { name: '500 UC', price: 'Rp 100.000' },
+          { name: '1250 UC', price: 'Rp 250.000' },
+          { name: '2500 UC', price: 'Rp 500.000' },
+          { name: '5000 UC', price: 'Rp 1.000.000' }
+        ]
+      },
+      'honor-of-kings': {
+        title: 'Honor of Kings',
+        developer: 'Tencent Games',
+        image: 'https://i.pinimg.com/736x/34/66/03/346603fe9ff5b071463b03e550dac76a.jpg',
+        items: [
+          { name: '60 Tokens', price: 'Rp 15.000' },
+          { name: '300 Tokens', price: 'Rp 75.000' },
+          { name: '980 Tokens', price: 'Rp 245.000' },
+          { name: '1980 Tokens', price: 'Rp 490.000' },
+          { name: '3280 Tokens', price: 'Rp 815.000' },
+          { name: '6480 Tokens', price: 'Rp 1.600.000' }
+        ]
+      },
+      'honkai-star-rail': {
+        title: 'Honkai: Star Rail',
+        developer: 'Hoyoverse',
+        image: 'https://i.pinimg.com/736x/91/00/49/910049f3b026069751c3088c67a90393.jpg',
+        items: [
+          { name: '60 Oneiric Shard', price: 'Rp 15.000' },
+          { name: '300 Oneiric Shard', price: 'Rp 75.000' },
+          { name: '980 Oneiric Shard', price: 'Rp 245.000' },
+          { name: '1980 Oneiric Shard', price: 'Rp 490.000' },
+          { name: '3280 Oneiric Shard', price: 'Rp 815.000' },
+          { name: '6480 Oneiric Shard', price: 'Rp 1.600.000' }
+        ]
+      },
+      'roblox': {
+        title: 'Roblox',
+        developer: 'Roblox Corporation',
+        image: 'https://i.pinimg.com/736x/49/00/7f/49007fdfdbedef52909eebeb2499052f.jpg',
+        items: [
+          { name: '80 Robux', price: 'Rp 10.000' },
+          { name: '400 Robux', price: 'Rp 50.000' },
+          { name: '800 Robux', price: 'Rp 100.000' },
+          { name: '2000 Robux', price: 'Rp 250.000' },
+          { name: '4500 Robux', price: 'Rp 500.000' },
+          { name: '10,000 Robux', price: 'Rp 1.000.000' }
+        ]
+      }
+    };
+
+    // Open modal with game data
+    function openModal(gameId) {
+      const modal = document.getElementById('gameModal');
+      const game = gameData[gameId];
+      
+      if (game) {
+        document.getElementById('modalGameTitle').textContent = game.title;
+        document.getElementById('modalGameDeveloper').textContent = game.developer;
+        document.getElementById('modalGameImage').src = game.image;
+        document.getElementById('modalGameImage').alt = game.title;
+        
+        const itemList = document.getElementById('itemList');
+        itemList.innerHTML = '';
+        
+        game.items.forEach(item => {
+          const itemCard = document.createElement('div');
+          itemCard.className = 'item-card';
+          itemCard.innerHTML = `
+            <div class="item-info">
+              <h4>${item.name}</h4>
+              <p>${game.title} In-Game Currency</p>
+            </div>
+            <div class="item-price">${item.price}</div>
+            <button class="buy-btn">Beli</button>
+          `;
+          itemList.appendChild(itemCard);
+        });
+        
+        modal.style.display = 'block';
+      }
+    }
+
+    // Close modal
+    function closeModal() {
+      document.getElementById('gameModal').style.display = 'none';
+    }
+
+    // Close modal when clicking outside
+    window.onclick = function(event) {
+      const modal = document.getElementById('gameModal');
+      if (event.target == modal) {
+        closeModal();
+      }
+    }
+  </script>
 </body>
 </html>

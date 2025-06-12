@@ -3,128 +3,429 @@
 <head>
     <meta charset="UTF-8">
     <title>Login - TopUp Game</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
     <style>
-        body {
+        * {
             margin: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(to right, #141e30, #243b55);
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            height: 100%;
+            font-family: 'Orbitron', sans-serif;
+            background-color: #0d0d0d;
+            overflow-x: hidden;
+        }
+
+        .container {
+            display: flex;
+            height: 100vh;
+            width: 100%;
+        }
+
+        .left {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slider {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .slide-content {
+            position: absolute;
+            bottom: 30px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            color: white;
+            padding: 0 20px;
+        }
+
+        .slide-content h3 {
+            font-size: 22px;
+            font-weight: bold;
+            background-color: rgba(0,0,0,0.6);
+            padding: 10px 20px;
+            border-radius: 10px;
+            display: inline-block;
+        }
+
+        .slider-controls {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            z-index: 10;
+        }
+
+        .slider-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: rgba(255,255,255,0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .slider-dot.active {
+            background-color: #00bfff;
+            transform: scale(1.2);
+        }
+
+        .right {
+            flex: 1;
+            background-color: #111;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 50px;
+            color: white;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .right h2 {
+            font-size: 26px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .right form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #aaa;
+            font-size: 14px;
+        }
+
+        form input[type="text"],
+        form input[type="password"] {
+            width: 100%;
+            padding: 12px 14px;
+            background: #1e1e1e;
+            border: 2px solid #2d2d2d;
+            border-radius: 6px;
+            color: white;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+
+        form input[type="text"]:focus,
+        form input[type="password"]:focus {
+            border-color: #00bfff;
+            outline: none;
+        }
+
+        ::placeholder {
+            color: #555;
+        }
+
+        .login-btn {
+            background-color: #00bfff;
+            color: black;
+            border: none;
+            padding: 14px;
+            border-radius: 6px;
+            font-weight: bold;
+            margin: 10px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .login-btn:hover {
+            background-color: #009acd;
+            box-shadow: 0 0 12px #00bfff;
+        }
+
+        .social-login {
+            text-align: center;
+            margin: 25px 0;
+            position: relative;
+        }
+
+        .social-login::before,
+        .social-login::after {
+            content: "";
+            display: inline-block;
+            width: 30%;
+            height: 1px;
+            background-color: #333;
+            position: absolute;
+            top: 50%;
+        }
+
+        .social-login::before {
+            left: 0;
+        }
+
+        .social-login::after {
+            right: 0;
+        }
+
+        .social-login span {
+            color: #bbb;
+            font-size: 13px;
+            padding: 0 10px;
+            position: relative;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .social-icons a {
+            text-decoration: none;
+            color: white;
+            background-color: #1e1e1e;
+            border: 1px solid #333;
+            width: 45px;
+            height: 45px;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            color: #fff;
-            animation: fadeIn 1s ease-in;
+            border-radius: 50%;
+            font-size: 18px;
+            transition: all 0.3s ease;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
+        .social-icons a:hover {
+            background-color: #00bfff;
+            color: black;
+            transform: translateY(-3px);
         }
 
-        .login-container {
-            background-color: rgba(0, 0, 0, 0.7);
-            padding: 40px 30px;
-            border-radius: 12px;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.3);
-            width: 100%;
-            max-width: 400px;
-        }
-
-        h2 {
+        .bottom-text {
             text-align: center;
-            margin-bottom: 24px;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #aaa;
         }
 
-        label {
-            display: block;
-            margin-bottom: 6px;
-            font-weight: bold;
-        }
-
-        input[type="text"], input[type="password"] {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 20px;
-            border: none;
-            border-radius: 8px;
-            outline: none;
-            background-color: #f0f0f0;
-        }
-
-        button {
-            width: 100%;
-            padding: 10px;
-            background-color: #00bcd4;
-            border: none;
-            border-radius: 8px;
-            color: white;
-            font-weight: bold;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-        }
-
-        button:hover {
-            background-color: #0194a5;
-            transform: translateY(-2px);
-        }
-
-        .register-link {
-            text-align: center;
-            margin-top: 16px;
-        }
-
-        .register-link a {
-            color: #00bcd4;
+        .bottom-text a {
+            color: #00bfff;
             text-decoration: none;
-            transition: color 0.3s;
-        }        .register-link a:hover {
-            color: #ffffff;
+            transition: all 0.3s ease;
+        }
+
+        .bottom-text a:hover {
+            text-decoration: underline;
+        }
+
+        .forgot-password {
+            text-align: right;
+            margin-bottom: 20px;
+        }
+
+        .forgot-password a {
+            color: #777;
+            font-size: 13px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .forgot-password a:hover {
+            color: #00bfff;
+        }
+
+        .error-message {
+            color: #ff4d4d;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .success-message {
+            color: #4dff4d;
+            text-align: center;
+            margin-bottom: 15px;
         }
 
         .home-link {
-            text-align: center;
             margin-bottom: 20px;
         }
 
         .home-link a {
-            color: #00bcd4;
+            color: #00bfff;
             text-decoration: none;
-            font-size: 14px;
-            transition: color 0.3s;
+            transition: all 0.3s ease;
         }
 
         .home-link a:hover {
-            color: #ffffff;
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .left {
+                height: 200px;
+                flex: none;
+            }
+
+            .right {
+                padding: 30px 20px;
+                flex: 1;
+                max-width: 100%;
+            }
+
+            .social-login::before,
+            .social-login::after {
+                width: 25%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .right {
+                padding: 25px 15px;
+            }
+
+            .social-login::before,
+            .social-login::after {
+                width: 20%;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="login-container">        <div class="home-link">
-            <a th:href="@{/}">← Kembali ke Beranda</a>
+    <div class="container">
+        <!-- Left Side with Image Slider -->
+        <div class="left">
+            <div class="slider">
+                <div class="slide active" style="background-image: url('https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/87f1d34d-2002-4608-b166-a5c6fac0f344/dfzhvuj-ee1f0a51-3e9d-4eb0-96b5-d63ddac7760a.jpg/v1/fill/w_1192,h_670,q_70,strp/_filtered_lunox_legend_skin_mlbb_wallpaper_by_dechunf_dfzhvuj-pre.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MjI1MCIsInBhdGgiOiJcL2ZcLzg3ZjFkMzRkLTIwMDItNDYwOC1iMTY2LWE1YzZmYWMwZjM0NFwvZGZ6aHZ1ai1lZTFmMGE1MS0zZTlkLTRlYjAtOTZiNS1kNjNkZGFjNzc2MGEuanBnIiwid2lkdGgiOiI8PTQwMDAifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uub3BlcmF0aW9ucyJdfQ.m13jPMDLu8N-wHfgApp4M7QliKFIA-7Wv-o3rBFWt3A')">
+                    <div class="slide-content">
+                        <h3>WELCOME BACK!<br>Login to your account</h3>
+                    </div>
+                </div>
+                <div class="slide" style="background-image: url('https://i.pinimg.com/736x/58/ac/95/58ac959bc8e84a80cc00891b02e5ac79.jpg')">
+                    <div class="slide-content">
+                        <h3>TOP UP YOUR FAVORITE GAMES<br>With secure payment</h3>
+                    </div>
+                </div>
+                <div class="slide" style="background-image: url('https://i.pinimg.com/originals/6b/66/32/6b663216955e50134bba3c796a4fc747.gif')">
+                    <div class="slide-content">
+                        <h3>EXCLUSIVE PROMOTIONS<br>For our members</h3>
+                    </div>
+                </div>
+                <div class="slider-controls">
+                    <div class="slider-dot active" onclick="goToSlide(0)"></div>
+                    <div class="slider-dot" onclick="goToSlide(1)"></div>
+                    <div class="slider-dot" onclick="goToSlide(2)"></div>
+                </div>
+            </div>
         </div>
-        <h2>Login</h2>
-        
-        <div th:if="${param.error}" style="color: #ff4d4d; text-align: center; margin-bottom: 15px;">
-            Username atau password salah. Silakan coba lagi.
-        </div>
-        
-        <div th:if="${param.registered}" style="color: #4dff4d; text-align: center; margin-bottom: 15px;">
-            Registrasi berhasil! Silakan login.
-        </div>
-        
-        <form method="post" th:action="@{/login}">
-            <label>Username:</label>
-            <input type="text" name="username" required>
 
-            <label>Password:</label>
-            <input type="password" name="password" required>
+        <!-- Right Side with Login Form -->
+        <div class="right">
+            <div class="home-link">
+                <a th:href="@{/}">← Kembali ke Beranda</a>
+            </div>
+            
+            <h2>Login</h2>
+            
+            <div th:if="${param.error}" class="error-message">
+                Username atau password salah. Silakan coba lagi.
+            </div>
+            
+            <div th:if="${param.registered}" class="success-message">
+                Registrasi berhasil! Silakan login.
+            </div>
+            
+            <form method="post" th:action="@{/login}">
+                <div class="form-group">
+                    <label>Username:</label>
+                    <input type="text" name="username" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Password:</label>
+                    <input type="password" name="password" required>
+                </div>
 
-            <button type="submit">Login</button>
-        </form>
-        <div class="register-link">
-            <p>Belum punya akun? <a th:href="@{/register}">Daftar di sini</a></p>
+                <div class="forgot-password">
+                    <a href="#">Lupa password?</a>
+                </div>
+                
+                <button type="submit" class="login-btn">Login</button>
+            </form>
+
+            <div class="social-login">
+                <span>Atau login dengan</span>
+            </div>
+
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-google"></i></a>
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+
+            <div class="bottom-text">
+                Belum punya akun? <a th:href="@{/register}">Daftar di sini</a>
+            </div>
         </div>
     </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.slider-dot');
+        
+        function showSlide(n) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+            
+            currentSlide = (n + slides.length) % slides.length;
+            slides[currentSlide].classList.add('active');
+            dots[currentSlide].classList.add('active');
+        }
+        
+        function goToSlide(n) {
+            showSlide(n);
+        }
+        
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+        
+        // Auto slide change every 5 seconds
+        setInterval(nextSlide, 5000);
+    </script>
 </body>
 </html>
