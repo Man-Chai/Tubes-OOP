@@ -47,6 +47,7 @@ public class SecurityConfig {
                 .requestMatchers("/admin/**", "/admin").hasRole("ADMIN")
                 .requestMatchers("/itemlist").hasRole("ADMIN")
                 .requestMatchers("/tambahItem").hasRole("ADMIN")
+                .requestMatchers("/tambahPayment").hasRole("USER")
                 .requestMatchers("/user/**", "/user").hasAnyRole("ADMIN", "USER")
                 .requestMatchers("/tambah").hasAnyRole("ADMIN", "USER")
                 .anyRequest().authenticated()

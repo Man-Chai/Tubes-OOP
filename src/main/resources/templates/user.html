@@ -72,13 +72,13 @@
                 <p class="welcome">Selamat datang, <span th:text="${username}"></span>!</p>
             </div>
             <div>
-                <a href="/" class="btn">Home</a>
                 <a href="/" class="btn btn-danger">Logout</a>
             </div>
         </div>
         
         <div style="margin-bottom: 20px;">
             <a href="/tambah" class="btn btn-success">Tambah Transaksi</a>
+            <a th:href="@{/tambahPayment}" class="btn btn-danger">Checkout</a>
         </div>
         
         <h3>Transaksi Anda</h3>
@@ -88,6 +88,7 @@
                     <th>Game</th>
                     <th>Nominal</th>
                     <th>Harga</th>
+                    <th>Status</th>
                 </tr>
             </thead>
             <tbody>

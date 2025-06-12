@@ -61,7 +61,9 @@ public class TopUpController {
         
         repo.save(topUp);
         return "redirect:/user";
-    }    @GetMapping("/hapus/{id}")
+    }   
+    
+    @GetMapping("/hapus/{id}")
     public String hapusTopup(@PathVariable Long id, Authentication authentication) {
         // Only allow deletion by the owner or admin
         if (authentication != null && authentication.getAuthorities().stream()
