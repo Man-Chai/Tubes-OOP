@@ -5,6 +5,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
+
 
 @Entity
 @Table(name = "payment")
@@ -15,9 +17,11 @@ public class Payment {
     
     // ID's Generate Privately
     private Long id;
-    private Long idgame; // <- agar sesuai dengan value dari <option value="${topup.id}">
+        
+    @NotNull(message = "ID Game harus dipilih")
+    private Long idgame;
 
-    // Attributes on "payment"
+    @NotNull(message = "Metode harus dipilih")
     public String metode;
     public String username;
 
